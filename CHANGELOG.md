@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Improved build.rs errors in lvgl-sys
+- On macOS, when building examples, turn `USE_FBDEV` and `USE_BSD_FBDEV` off (USE_FBDEV defaults on)
+
 ## [0.6.2]
 
 ### Fixed

@@ -112,6 +112,19 @@
 #  define SDL_DUAL_DISPLAY            0
 #endif
 
+/* If using SDL on macOS, do not use the Linux or FreeBSD framebuffers */
+#if USE_SDL && defined(__APPLE__)
+// linux
+# ifndef USE_FBDEV
+#  define USE_FBDEV 0
+# endif
+// FreeBSD
+# ifndef USE_BSD_FBDEV
+#  define USE_BSD_FBDEV 0
+# endif
+//
+#endif
+
 /*-------------------
  *  Monitor of PC
  *-------------------*/

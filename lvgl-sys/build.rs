@@ -268,7 +268,17 @@ fn add_font_headers(
 }
 
 fn add_c_files(build: &mut cc::Build, path: impl AsRef<Path>) {
-    for e in path.as_ref().read_dir().unwrap() {
+    // panic and specify the cause of the crash if the path is not found,
+    // this can happen for several reasons (including not updating the submodules on clone)
+    let dir = match path.as_ref().read_dir() {
+        Result::Ok(dir) => dir,
+        _ => panic!(
+            "BUILD ERROR occurred, could not find file or directory {:?}",
+            path.as_ref().to_str()
+        ),
+    };
+
+    for e in dir {
         let e = e.unwrap();
         let path = e.path();
         if e.file_type().unwrap().is_dir() {
